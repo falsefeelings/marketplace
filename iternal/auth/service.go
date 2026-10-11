@@ -112,6 +112,7 @@ func (s *Service) Login(ctx context.Context, in LoginInput) (string, *User, erro
 	return token, u, nil
 }
 
+<<<<<<< HEAD
 func (s *Service) Logout(ctx context.Context, token string) error {
 	if token == "" {
 		return nil
@@ -129,6 +130,8 @@ func (s *Service) Logout(ctx context.Context, token string) error {
 	return s.repo.RevokeSession(ctx, sess.ID)
 }
 
+=======
+>>>>>>> 26bdd1d84b23e0ba68083c0571e56e7f9a206125
 func (s *Service) Authenticate(ctx context.Context, token string) (*User, error) {
 	if token == "" {
 		return nil, ErrSessionNotFound
