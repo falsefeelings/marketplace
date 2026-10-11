@@ -20,6 +20,10 @@ type Service struct {
 	log   *slog.Logger
 }
 
+func (s *Service) LogoutAll(context context.Context, d int64) any {
+	panic("unimplemented")
+}
+
 func NewService(repo *Repository, cache *SessionCache, log *slog.Logger) *Service {
 	return &Service{repo: repo, cache: cache, log: log}
 }
@@ -108,6 +112,26 @@ func (s *Service) Login(ctx context.Context, in LoginInput) (string, *User, erro
 	return token, u, nil
 }
 
+<<<<<<< HEAD
+func (s *Service) Logout(ctx context.Context, token string) error {
+	if token == "" {
+		return nil
+	}
+	hash := HashToToken(token)
+	_ = s.cache.Delete(ctx, hash)
+
+	sess, err := s.repo.GetActiveSessionByTokenHash(ctx, hash)
+	if err != nil {
+		return err
+	}
+	if sess == nil {
+		return nil
+	}
+	return s.repo.RevokeSession(ctx, sess.ID)
+}
+
+=======
+>>>>>>> 26bdd1d84b23e0ba68083c0571e56e7f9a206125
 func (s *Service) Authenticate(ctx context.Context, token string) (*User, error) {
 	if token == "" {
 		return nil, ErrSessionNotFound
